@@ -66,30 +66,59 @@ Mengganti nama interface dan Melihat interface
      4     Ether5                             ether            1500  1598
 
      [admin@RB-Belajar] > 
+Mengaktifkan DHCP Client
+
+     [admin@RB-Belajar] > ip dhcp-client add interface=Ether1-WAN use-peer-dns=yes use-peer-ntp-
 Memberikan IP Address 192.168.10.1/24 dan Melihat IP Address
 
-     [admin@RB-Belajar] > ip address add address=192.168.10.1/24 interface=Ether1-WAN
+     [admin@RB-Belajar] > ip address add address=192.168.10.1/24 interface=Ether2-LAN
      [admin@RB-Belajar] > ip address print
-     flags: X - disabled, i - invalid, D - dynamic
+     Flags: X - disabled, i - invalid, D - dynamic
       #   ADDRESS            NETWORK         INTERFACE
-      0   192.168.10.1/24    192.168.10.1    Ether2-LAN
+      0   192.168.10.1/24    192.168.10.0    Ether2-LAN
      [admin@RB-Belajar] > 
 Mengedit IP Address 192.166.10.1/24 menjadi 192.168.20.1/24 dan Melihat IP Address
 
-![Edit IP](Edit%20IP.png)
-
+     [admin@RB-Belajar] > ip address set=192.168.20.1/24 interface=Ether2-LAN
+     numbers: 0
+     [admin@RB-Belajar] > ip address print
+     Flaags: X - disabled, i - invalid, D - dynamic
+      #   ADDRESS            NETWORK         INTERFACE
+      0   192.168.20.1/24    192.168.20.0    Ether2-LAN
+     [admin@RB-Belajar] > 
 Menambahkan perintah NAT dan Melihat konfigurasi NAT
 
-![NAT](NAT.png)
-
+     [admin@RB-Belajar] > ip firewall nat add chain=srcnat out-interface=Ether1-WAN action=masquerade
+     [admin@RB-Belajar] > ip firewall nat print
+     Flags: X - disabled, A - active, D - dynamic, 
+     c - connect, s - static, r - rip, b - bgp, o - ospf, m - mme, 
+     B - blackhole, U - unreachable, P - prohibit
+      #      DST-ADDRESS        PREF-SRC        GATEWAY            DISTANCE
+      0      0.0.0.0/0                          192.168.1.1               1
+      1      192.168.20.0/24    192.168.20.1    Ether2-LAN                0
+     [admin@RB-Belajar] > 
 Menambahkan gateway dan Melihat gateway
 
-![Gateway](Gateway.png)
-
+     [admin@RB-Belajar] > ip route add gateway=192.168.1.1
+     [admin@RB-Belajar] > ip route print
+     Flags: X - disabled, i - invalid, D - dynamic
+      0    chain=srcnat action=masquerade out-interface=Ether1-WAN
+     [admin@RB-Belajar] > 
 Menambahkan DNS dan Melihat DNS 
 
-![DNS](DNS.png)
-
+     [admin@RB-Belajar] > ip dns set servers=8.8.8.8 allow-remote-requests=yes
+     [admin@RB-Belajar] > ip dns print
+                          servers: 8.8.8.8
+                  dynamic-servers:
+                   use-doh-server:
+                  verify-doh-cert: no
+            allow-remote-requests: yes
+             max-udp-packet-sizes: 4096
+             query-server-timeout: 2s
+              query-total-timeout: 10s
+           max-concurrent-queries: 100
+           
+     [admin@RB-Belajar] > 
 Melakukan ping
 
 ![Ping](Ping.png)
