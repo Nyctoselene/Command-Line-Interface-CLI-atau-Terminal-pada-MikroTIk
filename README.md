@@ -5,42 +5,75 @@ Command Line Interface [CLI/Terminal] pada MikroTik
 
 ![Topo](Topo.png) 
 
-![CLI](CLI.png)
-
 Selain menggunakan winbox yang sangat user friendly dengan mode GUI nya, MikroTik juga dapat dikonfigurasi menggunakan mode CLI (berbasis teks/text mode).\
-Pada Lab1 Mikrotik router OS dapat dikonfig melalui CLI / terminal menggunakan akses/remote via : winbox (terminal), putty(ssh dan telnet), cmd(telnet), console dan Aplikasi Mikrotik Pro.  
+Pada Repo sebelumnya, Mikrotik router OS dapat dikonfig melalui CLI / terminal menggunakan akses/remote via: Winbox (terminal), PuTTY(ssh dan telnet), cmd(telnet), console dan Aplikasi Mikrotik Pro.  
 
-Mode CLI biasanya digunakan untuk user tingkat lanjut atau expert, terutama yang belajar menggunakan aplikasi GNS3 dan EVE-NG, karena lebih simple untuk langsung konfigurasi mikrotik tanpa harus menggunakan winbox.
+Mode CLI biasanya digunakan untuk user tingkat lanjut atau expert, terutama yang belajar menggunakan aplikasi GNS3 dan EVE-NG, karena lebih simple untuk langsung konfigurasi mikrotik tanpa harus menggunakan Winbox.
 
-Berikut ini perintah-perintah dasar pada mikrotik melalui terminal  :
+Berikut ini perintah-perintah dasar pada mikrotik melalui terminal:
+
 Mengganti identitas mikrotik
 
-![Identity](Identity.png)
-
+    [admin@MikroTik] > system identity set name=RB-Belajar
+    [admin@RB-Belajar] > 
+    
+     #(masukkan nama identity baru pada bagian name= )
 Memberikan password admin
 
-![Pass](Pass.png)
+    [admin@RB-Belajar] > password
+Setelah itu akan muncul tampilan untuk memasukkan password baru
 
+    old-password:
+    new-password:********
+    confirm-new-password:********
+    
+     #(karena old password nya adalah password bawaan dari MikroTik (yaitu blank) maka bagian old password tidak perlu diisi) 
 Membuat user baru dan password dengan hak akses full
 
-![Make User](Make%20User.png)
-
+    [admin@RB-Belajar] > user add name=Salman group=full password=admin123
+    
+     #(ada tiga jenis group:
+     read = hanya bisa membaca tidak bisa mengonfigurasi
+     write = dapat mengonfigurasi namun tidak dapat menambahkan user login baru dan melakukan reset configuration pada router
+     full = mempunyai akses full dalam mengonfigurasi) 
 Melihat user
 
-![See User](See%20User.png)
-
+    [admin@RB-Belajar] > user print
+    Flags: E - expired, X - disabled
+    #     NAME        GROUP        ADDRESS                       LAST-LOGGED-IN
+    0     ;;; system default user
+          admin       full                                       sep/12/2024 00:03:36
+    1     Salman      full
+    [admin@RB-Belajar] > 
 Melihat Lisensi
 
-![License](License.png)
-
+    [admin@RB-Belajar] > system license print
+      software-id: W716-FUJ3
+           nlevel: 4
+         features:
+    [admin@RB-Belajar] > 
 Mengganti nama interface dan Melihat interface
 
-![Rename](Rename.png)
+    [admin@RB-Belajar] > interface set name=Ether1-WAN ether1
+    [admin@RB-Belajar] > interface set name=Ether2-LAN ether2
+    [admin@RB-Belajar] > interface print
+    Flags: D - dynamic, X - disabled R - running, S - slave
+     #     NAME                               TYPE       ACTUAL-MTU L2MTU
+     0  R  Ether1-WAN                         ether            1500  1598
+     1  R  Ether2-LAN                         ether            1500  1598
+     2     Ether3                             ether            1500  1598
+     3     Ether4                             ether            1500  1598
+     4     Ether5                             ether            1500  1598
 
+     [admin@RB-Belajar] > 
 Memberikan IP Address 192.168.10.1/24 dan Melihat IP Address
 
-![Address](Address.png)
-
+     [admin@RB-Belajar] > ip address add address=192.168.10.1/24 interface=Ether1-WAN
+     [admin@RB-Belajar] > ip address print
+     flags: X - disabled, i - invalid, D - dynamic
+      #   ADDRESS            NETWORK         INTERFACE
+      0   192.168.10.1/24    192.168.10.1    Ether2-LAN
+     [admin@RB-Belajar] > 
 Mengedit IP Address 192.166.10.1/24 menjadi 192.168.20.1/24 dan Melihat IP Address
 
 ![Edit IP](Edit%20IP.png)
