@@ -68,7 +68,8 @@ Mengganti nama interface dan Melihat interface
      [admin@RB-Belajar] > 
 Mengaktifkan DHCP Client
 
-     [admin@RB-Belajar] > ip dhcp-client add interface=Ether1-WAN use-peer-dns=yes use-peer-ntp-
+     [admin@RB-Belajar] > ip dhcp-client add interface=Ether1-WAN use-peer-dns=yes use-peer-ntp=yes add-default-root=yes
+     [admin@RB-Belajar] > 
 Memberikan IP Address 192.168.10.1/24 dan Melihat IP Address
 
      [admin@RB-Belajar] > ip address add address=192.168.10.1/24 interface=Ether2-LAN
@@ -121,26 +122,32 @@ Menambahkan DNS dan Melihat DNS
      [admin@RB-Belajar] > 
 Melakukan ping
 
-![Ping](Ping.png)
-
+     [admin@RB-Belajar] > tool ping 192.168.20.1
+      current: 1565.8Mbps
+      average: 1268.6Mbps
+      
+     [admin@RB-Belajar] > 
 Klik Tab pada Keyboard dua kali untuk melihat perintah apa saja yang dapat digunakan
 
-![Available Comms](Available%20Comms.png)
+![Tab](Tab.png)
 
 Klik ? pada Keyboard untuk melihat semua perintah dan pengertiannya
 
-![List of Comms](List%20of%20Comms.png)
+![List](List.png)
 
 Menyingkat perintah
 
-![Singkat](Singkat.png)
-
+     [admin@RB-Belajar] > ip ad pr
+     Flaags: X - disabled, i - invalid, D - dynamic
+      #   ADDRESS            NETWORK         INTERFACE
+      0   192.168.20.1/24    192.168.20.0    Ether2-LAN
+     [admin@RB-Belajar] > 
 Ketik “..” untuk kembali ke direktori sebelumnya
 
-![Prevdir](Prevdir.png)
-
-
-Kesimpulan : 
+     [admin@RB-Belajar] > ip
+     [admin@RB-Belajar] /ip> .. 
+     [admin@RB-Belajar] > 
+# Kesimpulan
 Mode CLI biasanya digunakan untuk user tingkat lanjut atau expert, terutama yang belajar menggunakan aplikasi GNS3 dan EVE-NG, karena lebih simple untuk langsung konfigurasi mikrotik, tanpa harus menggunakan winbox.
 Pada mode CLI terdapat menu bantuan menggunakan tab dan tanda tanya(?) yang memudahkan user dalam menggunakan mode CLI.
 
