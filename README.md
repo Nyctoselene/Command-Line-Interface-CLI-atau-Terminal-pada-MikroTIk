@@ -1,6 +1,5 @@
 # Command-Line-Interface-(CLI)-atau-Terminal-pada-MikroTIk
 
-LAB 4
 Command Line Interface [CLI/Terminal] pada MikroTik
 
 ![Topo](Topo.png) 
