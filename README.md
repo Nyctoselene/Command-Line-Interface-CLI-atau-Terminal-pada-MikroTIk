@@ -1,6 +1,4 @@
-# Command-Line-Interface-(CLI)-atau-Terminal-pada-MikroTIk
-
-Command Line Interface [CLI/Terminal] pada MikroTik
+# Command Line Interface (CLI) atau Terminal pada MikroTik
 
 ![Topo](Topo.png) 
 
